@@ -74,3 +74,65 @@ export class ApiComponent implements OnInit {
   }
 }
 ```
+# Angular 引入Material组件
+## install Angular Material
+```typescript
+ng add @angular/material
+```
+### 需要注意material的版本号要与angular的版本号保持一致
+## app.module.ts中引入material
+### 以引入滑块为例子
+```typescript
+import { MatSliderModule } from '@angular/material/slider';
+@ngModule({
+  imports: [
+    MatSliderModule
+  ]
+})
+```
+### 在html中使用滑块
+```html
+<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+```
+## material各组件需要分别引入，如果需要引入slider、button、icon则需要在app.module.ts中分别引入，如：
+```typescript
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@auglar/material/button';
+import { MatIconModule } from '@angular/material/icon';
+@ngModule({
+  imports: [
+    MatSliderModule,
+    MatButtonModule,
+    MatIconModule
+  ]
+})
+```
+## 在引入大量material组件后app.module.ts会变得复杂繁琐，可以考虑将material的组件引入分离出来单独引入
+1. `ng generate module material-module`创建module文件
+2. 删除app.module.ts中关于material组件的引入代码，重新引入material-module文件
+```typescript
+import { MaterialModule } from './material-module.module';
+imports: [
+  MaterialModule
+]
+```
+3. 在material-module.module.ts中引入关于material组件的引入
+```typescript
+import { NgModule} from '@angular/core';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+@NgModule({
+  imports: [  // 引入
+    MatSliderModule,
+    MatButtonModule,
+    MatIconModule
+  ],
+  exports: [  // 导出
+    MatSliderModule,
+    MatButtonModule,
+    MatIconModule
+  ]
+})
+export class MaterialModule {}
+```
