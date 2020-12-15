@@ -136,3 +136,21 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MaterialModule {}
 ```
+# 路由配置，页面跳转
+## 如何从登录页跳转到首页，出现无效路由地址时跳转到404页面
+### 新建测试组件
+```typescript
+ng generate component login --module=app.module
+ng generate component main --module=app.module
+ng generate component main/left --module=app.module
+ng generate component main/right --module=app.module
+ng generate component page-not-found --module=app.module
+```
+> 因为测试项目中存在两个module文件，使用`ng g component xxx`命令新建组件时会报错，需要指定引入组件的module`--module=app.module`
+### 在app-routing.module.ts中建立路由
+> 具体配置见app-routing.module.ts文件
+### 在各页面使用router新建跳转到各页面的方法
+### 在app.component.html和main.component.html中各自使用一个<router-outlet></router-outlet>标签
+> `<router-outlet></router-outlet>`标签中会显示对应页面的内容，因为建立了二级路由的原因，login、mian、page-not-found跳转的页面会显示在app.component.html下，
+> 而main/left, main/right跳转的页面会显示在main.component.html中的`<router-outlet></router-outlet>`标签下，
+> 具体应用可以设置为登录页面登录后进入首页，首页下拉菜单中的子路由显示在各自的上级路由页面，错误页面同样单独显示

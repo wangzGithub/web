@@ -8,11 +8,21 @@ import { ApiComponent } from './api/api.component';
 import { fromEventPattern } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module.module';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
+import { LeftComponent } from './main/left/left.component';
+import { RightComponent } from './main/right/right.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ApiComponent
+    ApiComponent,
+    LoginComponent,
+    MainComponent,
+    LeftComponent,
+    RightComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
