@@ -154,3 +154,141 @@ ng generate component page-not-found --module=app.module
 > `<router-outlet></router-outlet>`标签中会显示对应页面的内容，因为建立了二级路由的原因，login、mian、page-not-found跳转的页面会显示在app.component.html下，
 > 而main/left, main/right跳转的页面会显示在main.component.html中的`<router-outlet></router-outlet>`标签下，
 > 具体应用可以设置为登录页面登录后进入首页，首页下拉菜单中的子路由显示在各自的上级路由页面，错误页面同样单独显示
+# 拆分路由，增加路由守卫和接口拦截器
+## 新建测试组件
+```typescript
+ng generate component dashboard
+ng generate module dashboard
+ng generate module dashboard-routing
+```
+> 将dashboard.module和dashboard-routing移到dashboard文件夹下
+## 删除app.module中引入的dashboardcomponent
+## 分别在dashboard.module和dashboard-routing中分别配置dashboard下的组件和路由
+```typescript
+···
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material-module.module';
+// 导入dashboard下的所有component
+import { DashboardComponent } from './dashboard.component';
+
+
+
+@NgModule({
+  declarations: [
+    DashboardComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule
+  ]
+})
+export class DashboardModule { }
+```
+```typescript
+// 为dashboard下的所有组件设置routing
+import { DashboardComponent } from './dashboard.component';
+
+const routes: Routes = [
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]
+  }
+]
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
+})
+export class DashboardRoutingModule { }
+```
+> 如果要在danhboard.component.html中使用`<router-outlet></router-outlet>`标签，需要在dashboard.module中引入RouterModule,如果需要使用material样式同样需要引入MaterialModule,
+> 因为dashboard.module没有引入app.module中声明的组件，所以需要单独引入
+## 将dashboard.module引入app.module,将dashboard-routing.module引入app-routing.module
+# 增加路由守卫
+## 新建路由守卫文件
+```typescript
+ng generate guard login
+```
+## 简单配置文件内容
+```typescript
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginGuard implements CanActivate {
+
+  constructor(private router: Router) {}
+
+  canActivate() {
+    let status: boolean = false;
+    status = localStorage.getItem('user') != null ? true : false;
+    if (!status) {
+      this.router.navigate(['']);
+    }
+    return status;
+  }
+  
+}
+```
+> 简单判断localStorage中是否存在user,如果存在返回true可以访问路由，否则返回到登录页面
+## 在需要判断登录状态的路径后加入路由守卫, 以dashboard为例，在dashboard-routing中加入以下代码
+```typescript
+// 引入路由守卫
+import { LoginGuard } from '../login.guard';
+const routes: Routes = [
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [LoginGuard]
+  }
+]
+```
+# 增加拦截器，对访问后台接口的方法进行统一拦截操作，可以为请求增加Header，也可以根据返回状态进行自定义操作
+## 新增拦截器
+```typescript
+ng generate service intercepter
+```
+## 写入如下代码
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+@Injectable()
+export class IntercepterService implements HttpInterceptor {
+
+  constructor(private router: Router) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    console.log(localStorage.getItem('user'));
+    const token = localStorage.getItem('user');
+    const resetReq = req.clone({setHeaders: {'token': token}});
+    return next.handle(resetReq).pipe(
+      catchError(error => {
+        console.log(error, '后端接口报错');
+        console.log(error.status);
+        if (error.status == 404) {
+          this.router.navigate(['page-not-found']);
+        } else {
+          this.router.navigate(['']);
+        }
+        throw error;
+      })
+    );
+  }
+}
+```
+## 引入拦截器, 在app.module中加入如下代码
+```typescript
+// 引入拦截器，处理访问后端接口状态
+import { IntercepterService } from './intercepter.service';
+providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true }
+  ],
+```

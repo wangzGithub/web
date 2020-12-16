@@ -16,7 +16,14 @@ export class LoginComponent implements OnInit {
   }
 
   toMain() {
+    const username = 'wangz';
+    const password = '@#&$)(oyt';
+    localStorage.setItem('user', username + password);
     this.router.navigate(['main']);
+  }
+
+  toDashboard() {
+    this.router.navigate(['dashboard']);
   }
 
 }

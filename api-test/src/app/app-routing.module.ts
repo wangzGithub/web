@@ -7,6 +7,8 @@ import { MainComponent } from './main/main.component';
 import { LeftComponent } from './main/left/left.component';
 import { RightComponent } from './main/right/right.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+// 引入dashboard下的路由配置
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
 
 const routes: Routes = [
   {
@@ -32,7 +34,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+    DashboardRoutingModule
+  ],
+  exports: [
+    RouterModule,
+    DashboardRoutingModule
+  ]
 })
 export class AppRoutingModule { }
