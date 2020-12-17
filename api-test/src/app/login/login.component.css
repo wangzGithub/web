@@ -1,0 +1,19 @@
+.body {
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
+}
+
+.form {
+    float: right;
+    text-align: center;
+    padding-top: 300px;
+    padding-right: 50px;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}

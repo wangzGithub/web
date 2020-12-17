@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material-module.module';
 // 导入dashboard下的所有component
 import { DashboardComponent } from './dashboard.component';
+import { TopComponent } from './top/top.component';
 
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    TopComponent
   ],
   imports: [
     CommonModule,

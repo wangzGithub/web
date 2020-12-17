@@ -1,3 +1,13 @@
-<p>login works!</p>
-<button mat-button (click)="toMain()">To Main</button>
-<button mat-button (click)="toDashboard()">To Dashboard</button>
+<div class="body" style="background-image: url('../../assets/image/testloginbg.jpg');">
+    <form class="form">
+        <mat-form-field class="full-width">
+            <mat-label>username</mat-label>
+            <input matInput placeholder="please input your username">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>password</mat-label>
+            <input type="password" matInput placeholder="please input your password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="toDashboard()">Login</button>
+    </form>
+</div>
