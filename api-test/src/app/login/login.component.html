@@ -2,12 +2,12 @@
     <form class="form">
         <mat-form-field class="full-width">
             <mat-label>username</mat-label>
-            <input matInput placeholder="please input your username">
+            <input matInput placeholder="please input your username" [(ngModel)]="user.username" name="username">
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>password</mat-label>
-            <input type="password" matInput placeholder="please input your password">
+            <input type="password" matInput placeholder="please input your password" [(ngModel)]="user.password" name="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="toDashboard()">Login</button>
+        <a mat-raised-button color="primary" (click)="loginToApi()">Login</a>
     </form>
 </div>

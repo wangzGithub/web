@@ -10,6 +10,8 @@ export class TopComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    let token = localStorage.getItem('user');
+    console.log(token);
   }
 
 }

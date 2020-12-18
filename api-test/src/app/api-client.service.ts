@@ -11,4 +11,8 @@ export class ApiClientService {
   getApiData(url:string) {
     return this.httpClient.get("/api" + url);
   }
+
+  postApiData(url: string, params: any) {
+    return this.httpClient.post("/api" + url, {params: params});
+  }
 }

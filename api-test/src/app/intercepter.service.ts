@@ -9,9 +9,13 @@ export class IntercepterService implements HttpInterceptor {
   constructor(private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log(localStorage.getItem('user'));
     const token = localStorage.getItem('user');
-    const resetReq = req.clone({setHeaders: {'token': token}});
+    let resetReq = null;
+    if (token != null) {
+      resetReq = req.clone({setHeaders: {'token': token}});
+    } else {
+      resetReq = req.clone();
+    }
     return next.handle(resetReq).pipe(
       catchError(error => {
         console.log(error, '后端接口报错');
