@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>自用账单统计</span>
+        <button mat-button [matMenuTriggerFor]="systemsetting">基础管理</button>
+        <mat-menu #systemsetting="matMenu">
+            <button mat-menu-item routerLink='base/in-out-type'>收支分类</button>
+            <button mat-menu-item>Item2</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
