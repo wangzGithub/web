@@ -9,9 +9,6 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(localStorage.getItem('token'));
-    console.log(localStorage.getItem('userId'));
-  }
+  ngOnInit(): void { }
 
 }

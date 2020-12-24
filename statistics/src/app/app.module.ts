@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 //登录后的页面router-outlet
 import { LayoutModule } from './layout/layout.module';
+import { ConfirmServiceComponent } from './confirm-service/confirm-service.component';
 
 
 
@@ -24,7 +25,8 @@ import { LayoutModule } from './layout/layout.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ConfirmServiceComponent
   ],
   imports: [
     BrowserModule,
