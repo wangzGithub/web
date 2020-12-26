@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../api-service.service';
+import { ApiService } from 'src/app/api-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmServiceComponent } from 'src/app/confirm-service/confirm-service.component';

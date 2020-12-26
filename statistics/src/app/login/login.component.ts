@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   title: string = "自用账单统计系统";
 
   user: any = {username: '', password: ''};
-  data: any = {code: 1, 'message': '', token: '', userId: ''};
+  data: any = {code: 1, 'message': '', token: '', userId: '', username: ''};
 
   toLogin() {
     // check params
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         } else {
           localStorage.setItem('token', this.data.token);
           localStorage.setItem('userId', this.data.userId);
-          console.log(this.data);
+          localStorage.setItem('username', this.data.username);
           this.router.navigate(['layout']);
         }
       });

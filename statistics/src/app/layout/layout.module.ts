@@ -8,13 +8,15 @@ import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
 import { BaseComponent } from './base/base.component';
 import { InOutTypeComponent } from './base/in-out-type/in-out-type.component';
+import { FundTypeComponent } from './base/fund-type/fund-type.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     HeaderComponent,
     BaseComponent,
-    InOutTypeComponent
+    InOutTypeComponent,
+    FundTypeComponent
   ],
   imports: [
     CommonModule,

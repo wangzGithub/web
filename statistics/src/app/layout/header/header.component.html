@@ -1,10 +1,21 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span>自用账单统计</span>
+        <!-- 第一个菜单 -->
         <button mat-button [matMenuTriggerFor]="systemsetting">基础管理</button>
         <mat-menu #systemsetting="matMenu">
-            <button mat-menu-item routerLink='base/in-out-type'>收支分类</button>
-            <button mat-menu-item>Item2</button>
+            <button mat-menu-item routerLink='base/in-out-type'>收支类型</button>
+            <button mat-menu-item routerLink='base/fund-type'>资金类型</button>
+        </mat-menu>
+        <span class="right"></span>
+        <!-- 右侧用户按钮 -->
+        <span>{{ username }}</span>
+        <button mat-button [matMenuTriggerFor]="usersetting">用户设置</button>
+        <mat-menu #usersetting="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Logout</span>
+            </button>
         </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

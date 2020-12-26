@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>资金类型</mat-card-title>
+        <mat-card-subtitle>展示资金类型</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <mat-form-field class="full-width">
+                <mat-label>code</mat-label>
+                <input matInput placeholder="请输入code" [(ngModel)]="new_fund_type.code" name="code">
+            </mat-form-field>&nbsp;
+            <mat-form-field class="full-width">
+                <mat-label>name</mat-label>
+                <input matInput placeholder="请输入名称" [(ngModel)]="new_fund_type.name" name="name">
+            </mat-form-field>
+            <a mat-button color="primary" (click)="addFundType()">Add</a>
+        </form>
+        <span>此处为资金类型添加</span>
+    </mat-card-content>
+</mat-card>
+<div *ngIf="!hasData">
+    <h2>No Data</h2>
+</div>
+<div *ngIf="hasData">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span>资金类型列表</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+<table mat-table [dataSource]="data" class="mat-elevation-z8" *ngIf="hasData">
+
+    <!-- CODE Column -->
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> CODE </th>
+        <td mat-cell *matCellDef="let element"> {{ element.code }} </td>
+    </ng-container>
+
+    <!-- NAME Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> NAME </th>
+        <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    </ng-container>
+
+    <!-- STATUS Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> STATUS </th>
+        <td mat-cell *matCellDef="let element"> {{ element.status == 0 ? '启用中' : '未启用' }} </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button color="warn" (click)="deleteFundType(element.id)">删除</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 // 基础设置组件
 import { BaseComponent } from './base/base.component';
 import { InOutTypeComponent } from './base/in-out-type/in-out-type.component';
+import { FundTypeComponent } from './base/fund-type/fund-type.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
           },
           {
             path: 'in-out-type', component: InOutTypeComponent
+          },
+          {
+            path: 'fund-type', component: FundTypeComponent
           }
         ]
       }

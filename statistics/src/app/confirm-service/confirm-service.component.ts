@@ -20,6 +20,8 @@ export class ConfirmServiceComponent {
       this.title = 'Add';
     } else if (data.type == 'delete') {
       this.title = 'Delete';
+    } else if (data.type == 'logout') {
+      this.title = 'Logout'
     } else {
       this.title = '???';
     }
