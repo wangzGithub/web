@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { BaseComponent } from './base/base.component';
 import { InOutTypeComponent } from './base/in-out-type/in-out-type.component';
 import { FundTypeComponent } from './base/fund-type/fund-type.component';
+import { InOutSourcesComponent } from './base/in-out-sources/in-out-sources.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FundTypeComponent } from './base/fund-type/fund-type.component';
     HeaderComponent,
     BaseComponent,
     InOutTypeComponent,
-    FundTypeComponent
+    FundTypeComponent,
+    InOutSourcesComponent
   ],
   imports: [
     CommonModule,

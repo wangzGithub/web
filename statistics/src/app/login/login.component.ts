@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  title: string = "自用账单统计系统";
+  title: string = "账单统计系统";
 
   user: any = {username: '', password: ''};
   data: any = {code: 1, 'message': '', token: '', userId: '', username: ''};

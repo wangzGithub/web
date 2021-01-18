@@ -1,11 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>自用账单统计</span>
+        <span>账单统计</span>
         <!-- 第一个菜单 -->
         <button mat-button [matMenuTriggerFor]="systemsetting">基础管理</button>
         <mat-menu #systemsetting="matMenu">
-            <button mat-menu-item routerLink='base/in-out-type'>收支类型</button>
+            <button mat-menu-item routerLink='base/in-out-type'>收支定义</button>
             <button mat-menu-item routerLink='base/fund-type'>资金类型</button>
+            <button mat-menu-item routerLink='base/in-out-sources'>收支分类</button>
         </mat-menu>
         <span class="right"></span>
         <!-- 右侧用户按钮 -->

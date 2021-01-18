@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { BaseComponent } from './base/base.component';
 import { InOutTypeComponent } from './base/in-out-type/in-out-type.component';
 import { FundTypeComponent } from './base/fund-type/fund-type.component';
+import { InOutSourcesComponent } from './base/in-out-sources/in-out-sources.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
           },
           {
             path: 'fund-type', component: FundTypeComponent
+          },
+          {
+            path: 'in-out-sources', component: InOutSourcesComponent
           }
         ]
       }
