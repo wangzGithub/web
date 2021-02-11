@@ -38,11 +38,11 @@ export class InOutTypeComponent implements OnInit {
 
   // 新增收支类型
   addInOutType() {
-    if (this.new_in_out_type.code == '') {
+    if (this.new_in_out_type.code.trim(' ') == '') {
       this.openSnackBar('code can not be null', 'i know');
       return;
     }
-    if (this.new_in_out_type.name == '') {
+    if (this.new_in_out_type.name.trim(' ') == '') {
       this.openSnackBar('name can not be null', 'i know');
       return;
     }

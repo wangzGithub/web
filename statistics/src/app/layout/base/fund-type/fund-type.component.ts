@@ -47,11 +47,11 @@ export class FundTypeComponent implements OnInit {
 
   // 新增资金类型
   addFundType(): void {
-    if (this.new_fund_type.code == '') {
+    if (this.new_fund_type.code.trim(' ') == '') {
       this.openSnackBar('code can not be null', 'i know');
       return;
     }
-    if (this.new_fund_type.name == '') {
+    if (this.new_fund_type.name.trim(' ') == '') {
       this.openSnackBar('name can not be null', 'i know');
       return;
     }
