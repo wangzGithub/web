@@ -14,6 +14,14 @@
                 </mat-select>
             </mat-form-field>&nbsp;
             <mat-form-field class="full-width">
+                <mat-label>一级分类</mat-label>
+                <mat-select [(ngModel)]="new_in_out_sources.parentId" name="parentId">
+                    <mat-option *ngFor="let parent of parent_sources_list" [value]="parent.id">
+                        {{ parent.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;
+            <mat-form-field class="full-width">
                 <mat-label>name</mat-label>
                 <input matInput placeholder="请输入名称" [(ngModel)]="new_in_out_sources.name" name="name">
             </mat-form-field>
@@ -38,10 +46,18 @@
       <th mat-header-cell *matHeaderCellDef> 分类 </th>
       <td mat-cell *matCellDef="let element"> {{element.inOutType.name}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="inOutSources">
+        <th mat-header-cell *matHeaderCellDef> 上级分类 </th>
+        <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.inOutSources == null">{{element.inOutSources}}</span>
+            <span *ngIf="element.inOutSources != null">{{element.inOutSources.name}}</span>
+        </td>
+    </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> 名称 </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 

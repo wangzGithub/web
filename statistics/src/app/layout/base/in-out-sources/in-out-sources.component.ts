@@ -17,11 +17,13 @@ export class InOutSourcesComponent implements OnInit {
 
   in_out_type_list: any = []; // 新增栏中显示收支定义
 
+  parent_sources_list: any = []; // 新增栏中显示上级收支分类
+
   userId = localStorage.getItem('userId');  // 登录用户userId
 
-  new_in_out_sources: any = {name: '', inOutTypeId: '', userId: this.userId}; // 创建新收支分类
+  new_in_out_sources: any = {name: '', inOutTypeId: '', parentId: '', userId: this.userId}; // 创建新收支分类
 
-  displayedColumns: string[] = ['inOutType', 'name', 'id']; // table 表头
+  displayedColumns: string[] = ['inOutType', 'inOutSources', 'name', 'id']; // table 表头
 
   constructor(
     private apiService: ApiService,
@@ -32,6 +34,7 @@ export class InOutSourcesComponent implements OnInit {
   ngOnInit(): void {
     this.getInOutSourcesList();
     this.getInOutTypeList();
+    this.getParentSourcesList();
   }
 
   // 打开底部提示框
@@ -60,6 +63,14 @@ export class InOutSourcesComponent implements OnInit {
     });
   }
 
+  // 查询父类收支分类
+  getParentSourcesList() {
+    let params = { userId: this.userId };
+    this.apiService.postApiData("/types/getParentInOutSources", params).subscribe(data => {
+      this.parent_sources_list = data;
+    });
+  }
+
   // 新增收支分类
   addInOutSources() {
     if (this.new_in_out_sources.inOutTypeId == '') {
@@ -70,6 +81,9 @@ export class InOutSourcesComponent implements OnInit {
       this.openSnackBar('名称不能为空', 'OK');
       return;
     }
+    if (this.new_in_out_sources.parentId == '') {
+      this.new_in_out_sources.parentId = 0;
+    }
     const dialogRef = this.dialog.open(ConfirmServiceComponent, {
       width: '250px',
       data: {type: 'add'}
@@ -78,10 +92,14 @@ export class InOutSourcesComponent implements OnInit {
       if (result) {
         this.apiService.postApiData("/types/addInOutSources", this.new_in_out_sources).subscribe(data => {
           if (data == 1) {
-            this.new_in_out_sources.name = '';
-            this.new_in_out_sources.inOutTypeId = '';
             this.openSnackBar('add success', 'OK');
             this.getInOutSourcesList();
+            if (this.new_in_out_sources.parentId == 0) {
+              this.getParentSourcesList();
+            }
+            this.new_in_out_sources.name = '';
+            this.new_in_out_sources.inOutTypeId = '';
+            this.new_in_out_sources.parentId = '';
           } else if (data == 2) {
             this.openSnackBar('名称重复', 'OK');
           } else {
